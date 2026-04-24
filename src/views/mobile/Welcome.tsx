@@ -6,6 +6,7 @@ export default function WelcomeMobile() {
   const [greeting, setGreeting] = useState('');
   const [value, setValue] = useState('');
 
+  // Список подсказок
   const suggestions = [
     "Расскажи о себе",
     "Какие есть топовые пачки?",
@@ -23,16 +24,17 @@ export default function WelcomeMobile() {
   return (
     <div className="fixed inset-0 flex flex-col bg-white overflow-hidden font-sans">
       
-      {/* Меню */}
+      {/* Кнопка меню (вверху слева) */}
       <div className="absolute top-6 left-6 z-50">
-        <button className="w-10 h-10 rounded-full bg-[#edf2f7] flex items-center justify-center active:scale-90 transition-all shadow-sm">
+        <button className="w-10 h-10 rounded-full bg-[#edf2f7] flex items-center justify-center active:scale-90 transition-all">
           <img src="/Icons/menu.PNG" alt="M" className="w-5 h-5 object-contain" />
         </button>
       </div>
 
-      <div className="flex-1 flex flex-col justify-center items-start px-8 w-full">
+      {/* Основной контент */}
+      <div className="flex-1 flex flex-col justify-center items-start px-8 w-full max-w-[500px]">
         
-        {/* Заголовки */}
+        {/* Группа текста (Темно-серый #1a1a1a) */}
         <div className="inline-block mb-8 select-none">
           <h1 className="text-[32px] font-bold tracking-tight text-[#1a1a1a] leading-tight">
             {greeting || 'Привет, юзер!'}
@@ -42,25 +44,22 @@ export default function WelcomeMobile() {
           </h2>
         </div>
 
-        {/* Блок подсказок (теперь с иконкой желтой лампочки) */}
-        <div className="w-full max-w-[440px] mb-5">
+        {/* Блок подсказок (Горизонтальный скролл) */}
+        <div className="w-full mb-5">
           <div className="flex gap-2.5 overflow-x-auto no-scrollbar pb-2">
             {suggestions.map((text, index) => (
               <button
                 key={index}
                 onClick={() => setValue(text)}
-                // Изменил пэддинги для компенсации иконки (pl-3 вместо pl-4)
-                className="flex items-center whitespace-nowrap pl-3 pr-4 py-2 bg-white text-[#7a89a3] border-[1.5px] border-[#edf2f7] rounded-2xl text-[14px] font-semibold active:scale-95 transition-all active:bg-[#f8fafc] shadow-sm active:shadow-none"
+                // Мягкий желтый фон #fef9c3, без тени
+                className="whitespace-nowrap flex items-center gap-2 px-4 py-2.5 bg-[#fef9c3] text-[#7a89a3] rounded-full text-[14px] font-semibold active:scale-95 transition-all active:bg-[#fef08a]"
               >
-                {/* Иконка лампочки bulb.PNG с приятным желтым цветом */}
-                <div className="w-5 h-5 rounded-full bg-[#fefce8] flex items-center justify-center mr-2 shrink-0">
-                  <img 
-                    src="/Icons/bulb.PNG" 
-                    alt="💡" 
-                    // brightness-0 invert превращает в белый, затем hue-rotate закрашивает
-                    className="w-3.5 h-3.5 object-contain brightness-0 invert-[15%] sepia-[100%] saturate-[10000%] hue-rotate-[10deg]"
-                  />
-                </div>
+                {/* Иконка лампочки bulb.PNG */}
+                <img 
+                  src="/Icons/bulb.PNG" 
+                  alt="💡" 
+                  className="w-4 h-4 object-contain brightness-95" 
+                />
                 {text}
               </button>
             ))}
@@ -68,11 +67,13 @@ export default function WelcomeMobile() {
         </div>
 
         {/* Строка ввода */}
-        <div className="w-full max-w-[440px]">
-          <div className="flex items-center h-[56px] bg-[#edf2f7] rounded-full pl-6 pr-2 transition-all focus-within:bg-[#e6ebf1]">
+        <div className="w-full">
+          <div className="flex items-center h-[56px] bg-[#edf2f7] rounded-full pl-6 pr-2 shadow-inner">
+            
             <div className="relative flex-1 h-full flex items-center">
               {value === "" && (
-                <span className="absolute left-0 text-[#7a89a3] font-medium text-[16px] pointer-events-none whitespace-nowrap">
+                // Подсказка с легким синеватым оттенком #7a89a3
+                <span className="absolute left-0 text-[#7a89a3] font-medium text-[16px] pointer-events-none whitespace-nowrap opacity-70">
                   Спросить что угодно…
                 </span>
               )}
@@ -80,10 +81,12 @@ export default function WelcomeMobile() {
                 type="text"
                 value={value}
                 onChange={(e) => setValue(e.target.value)}
+                // Текст ввода тоже темно-серый #1a1a1a
                 className="bg-transparent border-none outline-none text-[#1a1a1a] text-[16px] w-full font-medium"
               />
             </div>
 
+            {/* Кнопка отправки */}
             <button className="h-[42px] w-[42px] bg-[#1a1a1a] rounded-full flex items-center justify-center active:scale-95 transition-all shrink-0 ml-2">
               <img 
                 src="/Icons/send.PNG" 
@@ -96,6 +99,7 @@ export default function WelcomeMobile() {
 
       </div>
 
+      {/* Скрываем стандартный скроллбар */}
       <style jsx global>{`
         .no-scrollbar::-webkit-scrollbar {
           display: none;
