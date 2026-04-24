@@ -2,7 +2,7 @@ import type { Config } from "tailwindcss";
 
 const config: Config = {
   content: [
-    "./src/**/*.{js,ts,jsx,tsx,mdx}", // Хватает всё: app, views, components
+    "./src/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {
@@ -10,7 +10,6 @@ const config: Config = {
         apple: {
           bg: "#ffffff",
           secondary: "#f0f3f8",
-          border: "#e5e9f0",
         }
       },
     },
