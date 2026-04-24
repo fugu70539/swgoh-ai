@@ -23,7 +23,7 @@ export default function WelcomeMobile() {
   return (
     <div className="fixed inset-0 flex flex-col bg-white overflow-hidden font-sans">
       
-      {/* Меню */}
+      {/* Кнопка меню */}
       <div className="absolute top-6 left-6 z-50">
         <button className="w-[42px] h-[42px] rounded-full bg-[#edf2f7] flex items-center justify-center active:scale-90 transition-all">
           <img src="/Icons/menu.PNG" alt="M" className="w-5 h-5 object-contain" />
@@ -49,14 +49,14 @@ export default function WelcomeMobile() {
           </h2>
         </div>
 
-        {/* Блок подсказок с градиентом */}
+        {/* Подсказки */}
         <div className="w-full max-w-[440px] mb-5">
           <div className="flex gap-3 overflow-x-auto no-scrollbar pb-2">
             {suggestions.map((text, index) => (
               <button
                 key={index}
                 onClick={() => setValue(text)}
-                className="flex items-center gap-2 whitespace-nowrap px-5 py-3 bg-gradient-to-r from-[#fff5f0] to-white text-[#7a89a3] border-[1.5px] border-[#edf2f7] rounded-full text-[14px] font-semibold active:scale-95 transition-all active:opacity-80 flex-shrink-0"
+                className="flex items-center gap-2 whitespace-nowrap px-5 py-3 bg-white text-[#7a89a3] border-[1.5px] border-[#edf2f7] rounded-full text-[14px] font-semibold active:scale-95 transition-all active:bg-[#f8fafc] flex-shrink-0"
               >
                 <img 
                   src="/Icons/idea.PNG" 
@@ -75,6 +75,7 @@ export default function WelcomeMobile() {
         {/* Строка ввода */}
         <div className="w-full max-w-[440px]">
           <div className="flex items-center h-[56px] bg-[#edf2f7] rounded-full px-2">
+            
             <div className="relative flex-1 h-full flex items-center ml-4">
               {value === "" && (
                 <span className="absolute left-0 text-[#7a89a3] font-medium text-[16px] pointer-events-none whitespace-nowrap">
@@ -98,8 +99,8 @@ export default function WelcomeMobile() {
             </button>
           </div>
 
-          {/* Дисклеймер: ИИ капсом, чуть крупнее, перенос строки */}
-          <p className="mt-3 text-center text-[11.5px] text-[#1a1a1a] opacity-[0.6] font-medium leading-relaxed w-full tracking-wide">
+          {/* Дисклеймер: крупнее шрифт, меньше интервал, ИИ заглавными */}
+          <p className="mt-3 text-center text-[11.5px] text-[#1a1a1a] opacity-[0.6] font-medium leading-[1.1] w-full tracking-wide">
             ИИ может ошибаться, не стоит принимать все<br />за чистую монету
           </p>
         </div>
