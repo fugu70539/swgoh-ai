@@ -7,7 +7,6 @@ export default function WelcomeMobile() {
   const [value, setValue] = useState('');
   const [randomSuggestions, setRandomSuggestions] = useState<string[]>([]);
 
-  // 25 подсказок по SWGOH
   const allSuggestions = [
     "Лучшая пачка с Кеноби",
     "Как зафармить Легенду?",
@@ -41,7 +40,6 @@ export default function WelcomeMobile() {
     const randomG = greetings[Math.floor(Math.random() * greetings.length)];
     setGreeting(randomG === 'Что на душе' ? 'Что на душе, юзер?' : `${randomG}, юзер!`);
 
-    // Выбираем 6 случайных подсказок
     const shuffled = [...allSuggestions].sort(() => 0.5 - Math.random());
     setRandomSuggestions(shuffled.slice(0, 6));
   }, []);
@@ -87,10 +85,10 @@ export default function WelcomeMobile() {
                 <img 
                   src="/Icons/idea.PNG" 
                   alt="idea" 
-                  className="w-4 h-4 object-contain"
+                  className="w-4 h-4 object-contain opacity-70"
                   style={{ 
-                    // Новый "спокойный" оранжевый: приглушенный коралловый
-                    filter: 'invert(58%) sepia(13%) saturate(1588%) hue-rotate(326deg) brightness(95%) contrast(88%)' 
+                    // Цвет в тон текста рядом (#7a89a3)
+                    filter: 'invert(58%) sepia(13%) saturate(588%) hue-rotate(182deg) brightness(94%) contrast(90%)' 
                   }}
                 />
                 {text}
@@ -130,7 +128,13 @@ export default function WelcomeMobile() {
             ИИ может ошибаться, не стоит принимать все<br />за чистую монету
           </p>
         </div>
+      </div>
 
+      {/* Футер-подпись гильдии (тонкий намек на авторство) */}
+      <div className="pb-6 w-full text-center">
+         <span className="text-[10px] text-[#1a1a1a] opacity-20 font-bold tracking-[0.2em] uppercase">
+           Those who are in the shadows
+         </span>
       </div>
 
       <style jsx global>{`
