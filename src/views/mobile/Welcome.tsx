@@ -25,7 +25,7 @@ export default function WelcomeMobile() {
       
       {/* Меню */}
       <div className="absolute top-6 left-6 z-50">
-        <button className="w-10 h-10 rounded-full bg-[#edf2f7] flex items-center justify-center active:scale-90 transition-all">
+        <button className="w-10 h-10 rounded-full bg-[#edf2f7] flex items-center justify-center active:scale-90 transition-all shadow-sm">
           <img src="/Icons/menu.PNG" alt="M" className="w-5 h-5 object-contain" />
         </button>
       </div>
@@ -42,15 +42,25 @@ export default function WelcomeMobile() {
           </h2>
         </div>
 
-        {/* Блок подсказок (теперь с контуром и белым фоном) */}
+        {/* Блок подсказок (теперь с иконкой желтой лампочки) */}
         <div className="w-full max-w-[440px] mb-5">
-          <div className="flex gap-2 overflow-x-auto no-scrollbar pb-2">
+          <div className="flex gap-2.5 overflow-x-auto no-scrollbar pb-2">
             {suggestions.map((text, index) => (
               <button
                 key={index}
                 onClick={() => setValue(text)}
-                className="whitespace-nowrap px-4 py-2 bg-white text-[#7a89a3] border-[1.5px] border-[#edf2f7] rounded-2xl text-[14px] font-semibold active:scale-95 transition-all active:bg-[#f8fafc]"
+                // Изменил пэддинги для компенсации иконки (pl-3 вместо pl-4)
+                className="flex items-center whitespace-nowrap pl-3 pr-4 py-2 bg-white text-[#7a89a3] border-[1.5px] border-[#edf2f7] rounded-2xl text-[14px] font-semibold active:scale-95 transition-all active:bg-[#f8fafc] shadow-sm active:shadow-none"
               >
+                {/* Иконка лампочки bulb.PNG с приятным желтым цветом */}
+                <div className="w-5 h-5 rounded-full bg-[#fefce8] flex items-center justify-center mr-2 shrink-0">
+                  <img 
+                    src="/Icons/bulb.PNG" 
+                    alt="💡" 
+                    // brightness-0 invert превращает в белый, затем hue-rotate закрашивает
+                    className="w-3.5 h-3.5 object-contain brightness-0 invert-[15%] sepia-[100%] saturate-[10000%] hue-rotate-[10deg]"
+                  />
+                </div>
                 {text}
               </button>
             ))}
@@ -59,7 +69,7 @@ export default function WelcomeMobile() {
 
         {/* Строка ввода */}
         <div className="w-full max-w-[440px]">
-          <div className="flex items-center h-[56px] bg-[#edf2f7] rounded-full pl-6 pr-2">
+          <div className="flex items-center h-[56px] bg-[#edf2f7] rounded-full pl-6 pr-2 transition-all focus-within:bg-[#e6ebf1]">
             <div className="relative flex-1 h-full flex items-center">
               {value === "" && (
                 <span className="absolute left-0 text-[#7a89a3] font-medium text-[16px] pointer-events-none whitespace-nowrap">
