@@ -73,12 +73,12 @@ export default function Page() {
                 <button
                   key={i}
                   onClick={() => setV(t)}
-                  className="flex items-center gap-2 whitespace-nowrap px-5 py-3 bg-white text-[#7a89a3] border-[1.5px] border-[#edf2f7] rounded-full text-[14px] font-semibold active:scale-95 transition-all active:bg-[#f8fafc] flex-shrink-0"
+                  className="flex items-center gap-2 whitespace-nowrap px-5 py-3 bg-white text-[#7a89a3] border-[1.5px] border-[#edf2f7]/60 rounded-full text-[14px] font-semibold active:scale-95 transition-all active:bg-[#f8fafc] flex-shrink-0"
                 >
                   <img 
                     src="/Icons/idea.PNG" 
                     alt="" 
-                    className="w-4 h-4 object-contain"
+                    className="w-4 h-4 object-contain opacity-60"
                     style={{ filter: 'invert(64%) sepia(59%) saturate(1450%) hue-rotate(326deg) brightness(98%) contrast(92%)' }}
                   />
                   {t}
