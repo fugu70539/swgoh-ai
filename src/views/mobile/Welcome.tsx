@@ -40,7 +40,6 @@ export default function WelcomeMobile() {
 
   return (
     <div className="fixed inset-0 flex flex-col bg-white overflow-hidden font-sans">
-      {/* Кнопка меню */}
       <div className="absolute top-6 left-6 z-50">
         <button className="w-[42px] h-[42px] rounded-full bg-[#edf2f7] flex items-center justify-center active:scale-90 transition-all">
           <img src="/Icons/menu.PNG" alt="" className="w-5 h-5 object-contain" />
@@ -48,7 +47,7 @@ export default function WelcomeMobile() {
       </div>
 
       <div className="flex-1 relative w-full">
-        {/* Welcome State - ТВОЯ ОРИГИНАЛЬНАЯ ВЕРСТКА */}
+        {/* Welcome State */}
         <div className={`absolute inset-0 flex flex-col justify-center px-8 transition-all duration-500 ease-in-out ${st === 'chat' ? 'opacity-0 -translate-y-20 pointer-events-none' : 'opacity-100'}`}>
           <div className="w-full max-w-[440px]">
             <div className="flex items-center gap-3 mb-1">
@@ -68,8 +67,8 @@ export default function WelcomeMobile() {
           </div>
         </div>
 
-        {/* Chat State - ТВОЯ ОРИГИНАЛЬНАЯ ВЕРСТКА */}
-        <div className={`absolute inset-0 pt-24 px-8 overflow-y-auto no-scrollbar transition-opacity duration-500 ${st === 'chat' ? 'opacity-100' : 'opacity-0'}`}>
+        {/* Chat State (Messages) */}
+        <div className={`absolute inset-0 pt-24 px-8 overflow-y-auto no-scrollbar transition-opacity duration-500 ${st === 'chat' ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
           <div className="w-full max-w-[440px] flex flex-col gap-8 pb-32">
             {h.map((m, i) => (
               <div key={i} className={`text-[16px] leading-relaxed ${m.r === 'user' ? 'text-[#1a1a1a] font-semibold' : 'text-[#1a1a1a] opacity-80'}`}>
@@ -80,13 +79,19 @@ export default function WelcomeMobile() {
         </div>
       </div>
 
-      {/* Input Group - ТВОЯ ОРИГИНАЛЬНАЯ ВЕРСТКА */}
+      {/* Input Group */}
       <div className={`w-full px-8 pb-6 transition-all duration-500 ease-in-out ${st === 'chat' ? 'translate-y-0' : '-translate-y-[calc(50vh-140px)]'}`}>
         <div className="w-full max-w-[440px] mx-auto">
           <div className="flex items-center h-[56px] bg-[#edf2f7] rounded-full px-2">
             <div className="relative flex-1 h-full flex items-center ml-4">
-              {v === "" && <span className="absolute left-0 text-[#7a89a3] font-medium text-[16px] pointer-events-none">Спросить что угодно…</span>}
-              <input type="text" value={v} onChange={(e) => setV(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && send()} className="bg-transparent border-none outline-none text-[#1a1a1a] text-[16px] w-full font-medium" />
+              {v === "" && <span className="absolute left-0 text-[#7a89a3] font-medium text-[16px] pointer-events-none whitespace-nowrap">Спросить что угодно…</span>}
+              <input 
+                type="text" 
+                value={v} 
+                onChange={(e) => setV(e.target.value)} 
+                onKeyDown={(e) => e.key === 'Enter' && send()} 
+                className="bg-transparent border-none outline-none text-[#1a1a1a] text-[16px] w-full font-medium" 
+              />
             </div>
             <button 
               onClick={() => send()}
