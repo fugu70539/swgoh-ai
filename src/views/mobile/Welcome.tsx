@@ -23,7 +23,7 @@ export default function WelcomeMobile() {
   return (
     <div className="fixed inset-0 flex flex-col bg-white overflow-hidden font-sans">
       
-      {/* Кнопка меню — теперь строго того же размера, что и кнопка отправки (42px) */}
+      {/* Кнопка меню */}
       <div className="absolute top-6 left-6 z-50">
         <button className="w-[42px] h-[42px] rounded-full bg-[#edf2f7] flex items-center justify-center active:scale-90 transition-all">
           <img src="/Icons/menu.PNG" alt="M" className="w-5 h-5 object-contain" />
@@ -32,11 +32,19 @@ export default function WelcomeMobile() {
 
       <div className="flex-1 flex flex-col justify-center items-start px-8 w-full">
         
-        {/* Заголовки */}
-        <div className="inline-block mb-8 select-none">
-          <h1 className="text-[32px] font-bold tracking-tight text-[#1a1a1a] leading-tight">
-            {greeting || 'Привет, юзер!'}
-          </h1>
+        {/* Заголовки с иконкой */}
+        <div className="mb-8 select-none w-full">
+          <div className="flex items-center gap-3 mb-1">
+            {/* Иконка приложения размером с текст заголовка */}
+            <img 
+              src="/Icons/appicon.PNG" 
+              alt="App Icon" 
+              className="w-[36px] h-[36px] object-contain"
+            />
+            <h1 className="text-[32px] font-bold tracking-tight text-[#1a1a1a] leading-tight">
+              {greeting || 'Привет, юзер!'}
+            </h1>
+          </div>
           <h2 className="text-[32px] font-bold tracking-tight text-[#1a1a1a] opacity-60 leading-tight">
             Я помогу тебе с любым вопросом
           </h2>
@@ -57,11 +65,10 @@ export default function WelcomeMobile() {
           </div>
         </div>
 
-        {/* Строка ввода с идеальной симметрией */}
+        {/* Строка ввода */}
         <div className="w-full max-w-[440px]">
           <div className="flex items-center h-[56px] bg-[#edf2f7] rounded-full px-2">
             
-            {/* Контейнер для текста с левым отступом, равным правому (после кнопки) */}
             <div className="relative flex-1 h-full flex items-center ml-4">
               {value === "" && (
                 <span className="absolute left-0 text-[#7a89a3] font-medium text-[16px] pointer-events-none whitespace-nowrap">
@@ -76,7 +83,6 @@ export default function WelcomeMobile() {
               />
             </div>
 
-            {/* Кнопка отправки (42px) */}
             <button className="h-[42px] w-[42px] bg-[#1a1a1a] rounded-full flex items-center justify-center active:scale-95 transition-all shrink-0">
               <img 
                 src="/Icons/send.PNG" 
@@ -86,8 +92,8 @@ export default function WelcomeMobile() {
             </button>
           </div>
 
-          {/* Дисклеймер под строкой */}
-          <p className="mt-3 px-6 text-[12px] text-[#1a1a1a] opacity-[0.65] font-medium leading-tight">
+          {/* Дисклеймер — теперь центрирован по всей ширине строки */}
+          <p className="mt-3 text-center text-[12px] text-[#1a1a1a] opacity-[0.65] font-medium leading-tight w-full">
             Ии может ошибаться, не стоит принимать все за чистую монету
           </p>
         </div>
