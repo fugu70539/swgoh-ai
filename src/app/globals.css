@@ -3,24 +3,20 @@
 @tailwind utilities;
 
 :root {
-  --apple-blue-gray: #f2f2f7; /* Тот самый светлый серо-голубой */
-  --apple-text-gray: #8e8e93;
+  --background: #ffffff;
+  --foreground: #000000;
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
-  background-color: #ffffff;
-  height: 100dvh; /* dynamic viewport height для мобилок */
-  width: 100vw;
-  position: fixed;
+  color: var(--foreground);
+  background: var(--background);
+  /* Запрет системных жестов и скролла для эффекта нативного приложения */
+  overscroll-behavior: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Кастомный стиль для инпута, чтобы он был "стеклянным" или мягким */
-.apple-input-bg {
-  background-color: rgba(242, 242, 247, 0.8);
-  backdrop-filter: blur(10px);
-}
-
-input::placeholder {
-  color: rgba(60, 60, 67, 0.3);
+/* Фикс для iOS: убираем выделение при нажатии */
+* {
+  -webkit-tap-highlight-color: transparent;
 }
