@@ -9,7 +9,6 @@ export default function WelcomeMobile() {
   const suggestions = [
     "Расскажи о себе",
     "Какие есть топовые пачки?",
-    "Как пройти Противостояние?",
     "Лучшие модули на Вейдера",
     "Гайд по Реликвиям"
   ];
@@ -23,7 +22,7 @@ export default function WelcomeMobile() {
   return (
     <div className="fixed inset-0 flex flex-col bg-white overflow-hidden font-sans">
       
-      {/* Меню (без тени) */}
+      {/* Меню */}
       <div className="absolute top-6 left-6 z-50">
         <button className="w-10 h-10 rounded-full bg-[#edf2f7] flex items-center justify-center active:scale-90 transition-all">
           <img src="/Icons/menu.PNG" alt="M" className="w-5 h-5 object-contain" />
@@ -32,7 +31,7 @@ export default function WelcomeMobile() {
 
       <div className="flex-1 flex flex-col justify-center items-start px-8 w-full">
         
-        {/* Заголовки (темно-серый #1a1a1a, без теней) */}
+        {/* Заголовки */}
         <div className="inline-block mb-10 select-none">
           <h1 className="text-[32px] font-bold tracking-tight text-[#1a1a1a] leading-tight">
             {greeting || 'Привет, юзер!'}
@@ -42,61 +41,51 @@ export default function WelcomeMobile() {
           </h2>
         </div>
 
-        {/* Увеличенный объединенный блок ввода */}
-        <div className="w-full max-w-[480px]">
-          <div className="flex flex-col bg-[#edf2f7] rounded-[28px] p-2">
-            
-            {/* Блок подсказок внутри строки ввода (теперь сверху) */}
-            <div className="w-full mb-3 pt-1">
-              <div className="flex gap-2 overflow-x-auto no-scrollbar px-2">
-                {suggestions.map((text, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setValue(text)}
-                    className="flex items-center gap-2 whitespace-nowrap px-4 py-2.5 bg-white text-[#7a89a3] border border-[#e2e8f0] rounded-full text-[14px] font-semibold active:scale-95 transition-all active:bg-[#f8fafc]"
-                  >
-                    {/* Желтая иконка лампочки bulb.PNG */}
-                    <img 
-                      src="/Icons/bulb.PNG" 
-                      alt="💡" 
-                      className="w-4 h-4 object-contain filter-yellow" 
-                    />
-                    {text}
-                  </button>
-                ))}
-              </div>
+        {/* Увеличенный блок строки (Инпут + Подсказки внутри) */}
+        <div className="w-full max-w-[460px] bg-[#edf2f7] rounded-[32px] p-2 flex flex-col transition-all">
+          
+          {/* Верхняя часть: Инпут и кнопка */}
+          <div className="flex items-center h-[56px] pl-4">
+            <div className="relative flex-1 h-full flex items-center">
+              {value === "" && (
+                <span className="absolute left-0 text-[#7a89a3] font-medium text-[16px] pointer-events-none whitespace-nowrap">
+                  Спросить что угодно…
+                </span>
+              )}
+              <input
+                type="text"
+                value={value}
+                onChange={(e) => setValue(e.target.value)}
+                className="bg-transparent border-none outline-none text-[#1a1a1a] text-[16px] w-full font-medium"
+              />
             </div>
 
-            {/* Собственно строка ввода с кнопкой (высота увеличена) */}
-            <div className="flex items-center h-[64px] bg-[#edf2f7] rounded-full pl-6 pr-2">
-              <div className="relative flex-1 h-full flex items-center">
-                {value === "" && (
-                  <span className="absolute left-0 text-[#7a89a3] font-medium text-[16px] pointer-events-none whitespace-nowrap">
-                    Спросить что угодно…
-                  </span>
-                )}
-                <input
-                  type="text"
-                  value={value}
-                  onChange={(e) => setValue(e.target.value)}
-                  className="bg-transparent border-none outline-none text-[#1a1a1a] text-[16px] w-full font-medium"
-                />
-              </div>
+            {/* Кнопка (не увеличивали) */}
+            <button className="h-[42px] w-[42px] bg-[#1a1a1a] rounded-full flex items-center justify-center active:scale-95 transition-all shrink-0 ml-2">
+              <img 
+                src="/Icons/send.PNG" 
+                alt="↑" 
+                className="w-4 h-4 brightness-0 invert" 
+              />
+            </button>
+          </div>
 
-              <button className="h-[48px] w-[48px] bg-[#1a1a1a] rounded-full flex items-center justify-center active:scale-95 transition-all shrink-0 ml-3">
-                <img 
-                  src="/Icons/send.PNG" 
-                  alt="↑" 
-                  className="w-5 h-5 brightness-0 invert" 
-                />
+          {/* Нижняя часть: Подсказки внутри блока */}
+          <div className="flex gap-2 overflow-x-auto no-scrollbar px-2 pb-3 mt-1">
+            {suggestions.map((text, index) => (
+              <button
+                key={index}
+                onClick={() => setValue(text)}
+                className="whitespace-nowrap px-4 py-2 bg-white/50 text-[#5a6a85] rounded-2xl text-[13px] font-bold active:scale-95 transition-all hover:bg-white/80"
+              >
+                {text}
               </button>
-            </div>
+            ))}
           </div>
         </div>
 
       </div>
 
-      {/* CSS для скрытия скроллбара и фильтра для желтого цвета */}
       <style jsx global>{`
         .no-scrollbar::-webkit-scrollbar {
           display: none;
@@ -104,10 +93,6 @@ export default function WelcomeMobile() {
         .no-scrollbar {
           -ms-overflow-style: none;
           scrollbar-width: none;
-        }
-        /* Превращает черно-белую иконку в приятный желтый */
-        .filter-yellow {
-          filter: invert(85%) sepia(30%) saturate(1000%) hue-rotate(10deg) brightness(105%) contrast(105%);
         }
       `}</style>
     </div>
