@@ -5,19 +5,40 @@ import { useState, useEffect } from 'react';
 export default function WelcomeMobile() {
   const [greeting, setGreeting] = useState('');
   const [value, setValue] = useState('');
+  const [randomSuggestions, setRandomSuggestions] = useState<string[]>([]);
 
-  const suggestions = [
-    "Расскажи о себе",
-    "Какие есть топовые пачки?",
-    "Как пройти Противостояние?",
-    "Лучшие модули на Вейдера",
-    "Гайд по Реликвиям"
+  // Массив подсказок строго по SWGOH
+  const allSuggestions = [
+    "Лучшая пачка с Кенноби",
+    "Как зафармить Легенду?",
+    "Модули для Дарта Вейдера",
+    "Кого качать новичку в 2026?",
+    "Гайд на Великую Арену",
+    "Как победить Джаббу?",
+    "Рейд Набу: лучшие герои",
+    "Зачем нужны реликвии 9?",
+    "Контр-пики Галактических Легенд",
+    "Лучший флот для Арены",
+    "Как пройти Противостояние?", // Можно заменить на "Завоевание"
+    "Событие на получение Чебаки",
+    "Приоритет фарма Кайло Рена",
+    "Лучшие Дзеты для Гильдии",
+    "Как фармить Осколки быстрее?",
+    "Тир-лист персонажей SWGOH",
+    "Кого брать в команду Феникс?",
+    "Как победить в Войнах Гильдий?",
+    "Синхронизация с SWGOH.GG",
+    "Эффективный фарм кредитов"
   ];
 
   useEffect(() => {
     const greetings = ['Сап', 'Привет', 'Что на душе'];
-    const random = greetings[Math.floor(Math.random() * greetings.length)];
-    setGreeting(random === 'Что на душе' ? 'Что на душе, юзер?' : `${random}, юзер!`);
+    const randomG = greetings[Math.floor(Math.random() * greetings.length)];
+    setGreeting(randomG === 'Что на душе' ? 'Что на душе, юзер?' : `${randomG}, юзер!`);
+
+    // Рандомизация подсказок (выбираем 6 случайных)
+    const shuffled = [...allSuggestions].sort(() => 0.5 - Math.random());
+    setRandomSuggestions(shuffled.slice(0, 6));
   }, []);
 
   return (
@@ -49,10 +70,10 @@ export default function WelcomeMobile() {
           </h2>
         </div>
 
-        {/* Подсказки */}
+        {/* Подсказки (Рандомные) */}
         <div className="w-full max-w-[440px] mb-5">
           <div className="flex gap-3 overflow-x-auto no-scrollbar pb-2">
-            {suggestions.map((text, index) => (
+            {randomSuggestions.map((text, index) => (
               <button
                 key={index}
                 onClick={() => setValue(text)}
@@ -63,7 +84,8 @@ export default function WelcomeMobile() {
                   alt="idea" 
                   className="w-4 h-4 object-contain"
                   style={{ 
-                    filter: 'invert(69%) sepia(85%) saturate(1437%) hue-rotate(325deg) brightness(101%) contrast(99%)' 
+                    // Пастельный оранжевый фильтр (светлее и мягче)
+                    filter: 'invert(84%) sepia(21%) saturate(1025%) hue-rotate(331deg) brightness(101%) contrast(98%)' 
                   }}
                 />
                 {text}
@@ -99,7 +121,6 @@ export default function WelcomeMobile() {
             </button>
           </div>
 
-          {/* Дисклеймер: крупнее шрифт, меньше интервал, ИИ заглавными */}
           <p className="mt-3 text-center text-[11.5px] text-[#1a1a1a] opacity-[0.6] font-medium leading-[1.1] w-full tracking-wide">
             ИИ может ошибаться, не стоит принимать все<br />за чистую монету
           </p>
