@@ -32,13 +32,12 @@ export default function WelcomeMobile() {
 
       <div className="flex-1 flex flex-col justify-center items-start px-8 w-full">
         
-        {/* Заголовки с иконкой */}
+        {/* Заголовки с иконкой приложения */}
         <div className="mb-8 select-none w-full">
           <div className="flex items-center gap-3 mb-1">
-            {/* Иконка приложения размером с текст заголовка */}
             <img 
               src="/Icons/appicon.PNG" 
-              alt="App Icon" 
+              alt="App" 
               className="w-[36px] h-[36px] object-contain"
             />
             <h1 className="text-[32px] font-bold tracking-tight text-[#1a1a1a] leading-tight">
@@ -50,15 +49,22 @@ export default function WelcomeMobile() {
           </h2>
         </div>
 
-        {/* Блок подсказок */}
+        {/* Блок подсказок с иконками огня */}
         <div className="w-full max-w-[440px] mb-5">
           <div className="flex gap-2 overflow-x-auto no-scrollbar pb-2">
             {suggestions.map((text, index) => (
               <button
                 key={index}
                 onClick={() => setValue(text)}
-                className="whitespace-nowrap px-4 py-2 bg-white text-[#7a89a3] border-[1.5px] border-[#edf2f7] rounded-2xl text-[14px] font-semibold active:scale-95 transition-all active:bg-[#f8fafc]"
+                className="flex items-center gap-2 whitespace-nowrap px-4 py-2 bg-white text-[#7a89a3] border-[1.5px] border-[#edf2f7] rounded-2xl text-[14px] font-semibold active:scale-95 transition-all active:bg-[#f8fafc]"
               >
+                {/* Иконка огонька с заданным цветом */}
+                <img 
+                  src="/Icons/idea.PNG" 
+                  alt="idea" 
+                  className="w-3.5 h-3.5 object-contain"
+                  style={{ filter: 'drop-shadow(0 0 0 #FE894B)' }} // На случай если PNG требует тонировки
+                />
                 {text}
               </button>
             ))}
@@ -92,8 +98,8 @@ export default function WelcomeMobile() {
             </button>
           </div>
 
-          {/* Дисклеймер — теперь центрирован по всей ширине строки */}
-          <p className="mt-3 text-center text-[12px] text-[#1a1a1a] opacity-[0.65] font-medium leading-tight w-full">
+          {/* Мелкий центрированный дисклеймер */}
+          <p className="mt-3 text-center text-[10.5px] text-[#1a1a1a] opacity-[0.6] font-medium leading-tight w-full tracking-wide">
             Ии может ошибаться, не стоит принимать все за чистую монету
           </p>
         </div>
