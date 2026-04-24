@@ -7,9 +7,9 @@ export default function WelcomeMobile() {
   const [value, setValue] = useState('');
   const [randomSuggestions, setRandomSuggestions] = useState<string[]>([]);
 
-  // Массив подсказок строго по SWGOH
+  // 25 подсказок по SWGOH
   const allSuggestions = [
-    "Лучшая пачка с Кенноби",
+    "Лучшая пачка с Кеноби",
     "Как зафармить Легенду?",
     "Модули для Дарта Вейдера",
     "Кого качать новичку в 2026?",
@@ -19,16 +19,21 @@ export default function WelcomeMobile() {
     "Зачем нужны реликвии 9?",
     "Контр-пики Галактических Легенд",
     "Лучший флот для Арены",
-    "Как пройти Противостояние?", // Можно заменить на "Завоевание"
-    "Событие на получение Чебаки",
+    "Как эффективно фармить моды?",
+    "Событие на Чебакку",
     "Приоритет фарма Кайло Рена",
     "Лучшие Дзеты для Гильдии",
     "Как фармить Осколки быстрее?",
-    "Тир-лист персонажей SWGOH",
+    "Тир-лист персонажей 2026",
     "Кого брать в команду Феникс?",
     "Как победить в Войнах Гильдий?",
     "Синхронизация с SWGOH.GG",
-    "Эффективный фарм кредитов"
+    "Эффективный фарм кредитов",
+    "Как пройти 7 уровень Испытаний?",
+    "Лучшие команды для Завоевания",
+    "Гайд по Осквернителю",
+    "Как получить Бо-Катан (Мандалор)?",
+    "Приоритеты в магазине Осколков"
   ];
 
   useEffect(() => {
@@ -36,7 +41,7 @@ export default function WelcomeMobile() {
     const randomG = greetings[Math.floor(Math.random() * greetings.length)];
     setGreeting(randomG === 'Что на душе' ? 'Что на душе, юзер?' : `${randomG}, юзер!`);
 
-    // Рандомизация подсказок (выбираем 6 случайных)
+    // Выбираем 6 случайных подсказок
     const shuffled = [...allSuggestions].sort(() => 0.5 - Math.random());
     setRandomSuggestions(shuffled.slice(0, 6));
   }, []);
@@ -70,7 +75,7 @@ export default function WelcomeMobile() {
           </h2>
         </div>
 
-        {/* Подсказки (Рандомные) */}
+        {/* Подсказки */}
         <div className="w-full max-w-[440px] mb-5">
           <div className="flex gap-3 overflow-x-auto no-scrollbar pb-2">
             {randomSuggestions.map((text, index) => (
@@ -84,8 +89,8 @@ export default function WelcomeMobile() {
                   alt="idea" 
                   className="w-4 h-4 object-contain"
                   style={{ 
-                    // Пастельный оранжевый фильтр (светлее и мягче)
-                    filter: 'invert(84%) sepia(21%) saturate(1025%) hue-rotate(331deg) brightness(101%) contrast(98%)' 
+                    // Новый "спокойный" оранжевый: приглушенный коралловый
+                    filter: 'invert(58%) sepia(13%) saturate(1588%) hue-rotate(326deg) brightness(95%) contrast(88%)' 
                   }}
                 />
                 {text}
