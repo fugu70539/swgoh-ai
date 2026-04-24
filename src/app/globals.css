@@ -7,16 +7,18 @@
   --foreground: #000000;
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  /* Запрет системных жестов и скролла для эффекта нативного приложения */
-  overscroll-behavior: none;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  /* Убираем синие рамки при фокусе в некоторых браузерах */
+  outline: none !important;
 }
 
-/* Фикс для iOS: убираем выделение при нажатии */
-* {
-  -webkit-tap-highlight-color: transparent;
+body {
+  background: white;
+  color: black;
+  /* Системные шрифты Apple */
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overscroll-behavior: none;
 }
