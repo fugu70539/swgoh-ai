@@ -2,11 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
-  box-sizing: border-box;
-  -webkit-tap-highlight-color: transparent;
+:root {
+  --apple-blue-gray: #f2f2f7; /* Тот самый светлый серо-голубой */
+  --apple-text-gray: #8e8e93;
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+  background-color: #ffffff;
+  height: 100dvh; /* dynamic viewport height для мобилок */
+  width: 100vw;
+  position: fixed;
+}
+
+/* Кастомный стиль для инпута, чтобы он был "стеклянным" или мягким */
+.apple-input-bg {
+  background-color: rgba(242, 242, 247, 0.8);
+  backdrop-filter: blur(10px);
+}
+
+input::placeholder {
+  color: rgba(60, 60, 67, 0.3);
 }
