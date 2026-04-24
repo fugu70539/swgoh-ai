@@ -9,8 +9,8 @@ export default function WelcomeMobile() {
   const suggestions = [
     "Расскажи о себе",
     "Какие есть топовые пачки?",
-    "Лучшие модули на Вейдера",
-    "Гайд по Реликвиям"
+    "Как пройти Противостояние?",
+    "Лучшие модули на Вейдера"
   ];
 
   useEffect(() => {
@@ -22,7 +22,7 @@ export default function WelcomeMobile() {
   return (
     <div className="fixed inset-0 flex flex-col bg-white overflow-hidden font-sans">
       
-      {/* Меню */}
+      {/* Кнопка меню */}
       <div className="absolute top-6 left-6 z-50">
         <button className="w-10 h-10 rounded-full bg-[#edf2f7] flex items-center justify-center active:scale-90 transition-all">
           <img src="/Icons/menu.PNG" alt="M" className="w-5 h-5 object-contain" />
@@ -31,8 +31,8 @@ export default function WelcomeMobile() {
 
       <div className="flex-1 flex flex-col justify-center items-start px-8 w-full">
         
-        {/* Заголовки */}
-        <div className="inline-block mb-10 select-none">
+        {/* Текстовый блок */}
+        <div className="inline-block mb-8 select-none">
           <h1 className="text-[32px] font-bold tracking-tight text-[#1a1a1a] leading-tight">
             {greeting || 'Привет, юзер!'}
           </h1>
@@ -41,10 +41,23 @@ export default function WelcomeMobile() {
           </h2>
         </div>
 
-        {/* Увеличенный блок строки (Инпут + Подсказки внутри) */}
-        <div className="w-full max-w-[460px] bg-[#edf2f7] rounded-[32px] p-2 flex flex-col transition-all">
+        {/* Единый увеличенный блок ввода */}
+        <div className="w-full max-w-[440px] bg-[#edf2f7] rounded-[32px] p-2 flex flex-col">
           
-          {/* Верхняя часть: Инпут и кнопка */}
+          {/* Секция подсказок (внутри блока, сверху) */}
+          <div className="flex gap-2 overflow-x-auto no-scrollbar pt-3 px-4 pb-4">
+            {suggestions.map((text, index) => (
+              <button
+                key={index}
+                onClick={() => setValue(text)}
+                className="whitespace-nowrap px-4 py-2 bg-white text-[#7a89a3] border border-[#e2e8f0] rounded-2xl text-[13px] font-semibold active:scale-95 transition-all"
+              >
+                {text}
+              </button>
+            ))}
+          </div>
+
+          {/* Секция ввода (внизу блока) */}
           <div className="flex items-center h-[56px] pl-4">
             <div className="relative flex-1 h-full flex items-center">
               {value === "" && (
@@ -60,27 +73,14 @@ export default function WelcomeMobile() {
               />
             </div>
 
-            {/* Кнопка (не увеличивали) */}
-            <button className="h-[42px] w-[42px] bg-[#1a1a1a] rounded-full flex items-center justify-center active:scale-95 transition-all shrink-0 ml-2">
+            {/* Кнопка (размер прежний, не увеличиваем) */}
+            <button className="h-[42px] w-[42px] bg-[#1a1a1a] rounded-full flex items-center justify-center active:scale-95 transition-all shrink-0">
               <img 
                 src="/Icons/send.PNG" 
                 alt="↑" 
                 className="w-4 h-4 brightness-0 invert" 
               />
             </button>
-          </div>
-
-          {/* Нижняя часть: Подсказки внутри блока */}
-          <div className="flex gap-2 overflow-x-auto no-scrollbar px-2 pb-3 mt-1">
-            {suggestions.map((text, index) => (
-              <button
-                key={index}
-                onClick={() => setValue(text)}
-                className="whitespace-nowrap px-4 py-2 bg-white/50 text-[#5a6a85] rounded-2xl text-[13px] font-bold active:scale-95 transition-all hover:bg-white/80"
-              >
-                {text}
-              </button>
-            ))}
           </div>
         </div>
 
