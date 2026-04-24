@@ -1,19 +1,22 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
-  content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
+  // Проверь, чтобы эти пути точно соответствовали твоей структуре
+  content: [
+    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/views/**/*.{js,ts,jsx,tsx,mdx}", // Важно для твоей папки views!
+  ],
   theme: {
     extend: {
       colors: {
         apple: {
-          bg: "#f5f5f7",
-          card: "rgba(255, 255, 255, 0.72)",
-          border: "rgba(0, 0, 0, 0.1)"
+          bg: "#ffffff",
+          secondary: "#f0f3f8", // Тот самый синеватый оттенок
+          border: "#e5e9f0",
         }
       },
-      backdropBlur: {
-        saturate: "180%"
-      }
     },
   },
   plugins: [],
