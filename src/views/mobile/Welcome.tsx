@@ -1,37 +1,45 @@
-import React from 'react';
+"use client";
+
+import React, { useState, useEffect } from "react";
+import { SearchInput } from "@/components/SearchInput";
 
 export default function WelcomeMobile() {
+  const [greeting, setGreeting] = useState("");
+
+  useEffect(() => {
+    const greetings = ["Сап", "Привет", "Что на душе"];
+    const random = greetings[Math.floor(Math.random() * greetings.length)];
+    
+    // Если "Что на душе", ставим вопрос, иначе восклицательный знак
+    const sign = random === "Что на душе" ? "?" : "!";
+    setGreeting(`${random}, юзер${sign}`);
+  }, []);
+
   return (
-    <div className="flex flex-col h-screen bg-white">
-      {/* Шапка */}
-      <header className="sticky top-0 z-10 backdrop-blur-md bg-white/70 border-b border-gray-200 px-6 py-4">
-        <h1 className="text-lg font-semibold tracking-tight text-center">swgoh.ai</h1>
-      </header>
-
-      {/* Контент чата */}
-      <main className="flex-1 overflow-y-auto p-6 flex flex-col justify-center items-center text-center">
-        <div className="w-20 h-20 bg-black rounded-2xl mb-6 shadow-xl flex items-center justify-center">
-           <span className="text-white text-3xl font-bold">S</span>
+    <div className="flex flex-col h-full w-full relative">
+      {/* Кнопка меню вверху слева */}
+      <div className="absolute top-6 left-6">
+        <div className="w-10 h-10 rounded-full bg-[#F2F2F7] flex items-center justify-center active:scale-95 transition-transform overflow-hidden">
+          <img src="/Icons/menu.PNG" alt="Menu" className="w-5 h-5 object-contain" />
         </div>
-        <h2 className="text-2xl font-bold mb-2">Привет, Гранд-Мастер</h2>
-        <p className="text-gray-500 text-sm max-w-[240px]">
-          Твой личный ИИ-советник по «Галактике Героев». Готов к анализу?
-        </p>
+      </div>
+
+      {/* Центр */}
+      <main className="flex-1 flex flex-col items-center justify-center px-8">
+        <div className="text-center mb-8">
+          <h1 className="text-[28px] font-bold tracking-tight mb-1 italic">
+            {greeting}
+          </h1>
+          <p className="text-[17px] opacity-65 font-medium">
+            Спрашивай о чем угодно
+          </p>
+        </div>
+
+        {/* Инпут */}
+        <div className="w-full max-w-sm">
+          <SearchInput />
+        </div>
       </main>
-
-      {/* Инпут внизу */}
-      <footer className="p-4 bg-white border-t border-gray-100">
-        <div className="relative">
-          <input 
-            type="text" 
-            placeholder="Спроси что-нибудь..." 
-            className="w-full bg-[#f2f2f7] border-none rounded-full py-3 px-5 focus:ring-2 focus:ring-blue-500 transition-all outline-none"
-          />
-          <button className="absolute right-2 top-1.5 bg-black text-white w-8 h-8 rounded-full flex items-center justify-center">
-            ↑
-          </button>
-        </div>
-      </footer>
     </div>
   );
 }
