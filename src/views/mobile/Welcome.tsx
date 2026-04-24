@@ -32,7 +32,7 @@ export default function WelcomeMobile() {
 
       <div className="flex-1 flex flex-col justify-center items-start px-8 w-full">
         
-        {/* Заголовки с иконкой приложения */}
+        {/* Заголовки с иконкой */}
         <div className="mb-8 select-none w-full">
           <div className="flex items-center gap-3 mb-1">
             <img 
@@ -49,21 +49,23 @@ export default function WelcomeMobile() {
           </h2>
         </div>
 
-        {/* Блок подсказок с иконками огня */}
+        {/* Блок подсказок — увеличенная ширина и скругление */}
         <div className="w-full max-w-[440px] mb-5">
-          <div className="flex gap-2 overflow-x-auto no-scrollbar pb-2">
+          <div className="flex gap-3 overflow-x-auto no-scrollbar pb-2">
             {suggestions.map((text, index) => (
               <button
                 key={index}
                 onClick={() => setValue(text)}
-                className="flex items-center gap-2 whitespace-nowrap px-4 py-2 bg-white text-[#7a89a3] border-[1.5px] border-[#edf2f7] rounded-2xl text-[14px] font-semibold active:scale-95 transition-all active:bg-[#f8fafc]"
+                className="flex items-center gap-2 whitespace-nowrap px-5 py-3 bg-white text-[#7a89a3] border-[1.5px] border-[#edf2f7] rounded-full text-[14px] font-semibold active:scale-95 transition-all active:bg-[#f8fafc] flex-shrink-0"
               >
-                {/* Иконка огонька с заданным цветом */}
+                {/* Принудительная покраска иконки в #FE894B через filter */}
                 <img 
                   src="/Icons/idea.PNG" 
                   alt="idea" 
-                  className="w-3.5 h-3.5 object-contain"
-                  style={{ filter: 'drop-shadow(0 0 0 #FE894B)' }} // На случай если PNG требует тонировки
+                  className="w-4 h-4 object-contain"
+                  style={{ 
+                    filter: 'invert(69%) sepia(85%) saturate(1437%) hue-rotate(325deg) brightness(101%) contrast(99%)' 
+                  }}
                 />
                 {text}
               </button>
@@ -98,9 +100,9 @@ export default function WelcomeMobile() {
             </button>
           </div>
 
-          {/* Мелкий центрированный дисклеймер */}
-          <p className="mt-3 text-center text-[10.5px] text-[#1a1a1a] opacity-[0.6] font-medium leading-tight w-full tracking-wide">
-            Ии может ошибаться, не стоит принимать все за чистую монету
+          {/* Дисклеймер с переносом строки */}
+          <p className="mt-3 text-center text-[10.5px] text-[#1a1a1a] opacity-[0.6] font-medium leading-normal w-full tracking-wide">
+            Ии может ошибаться, не стоит принимать все<br />за чистую монету
           </p>
         </div>
 
