@@ -5,16 +5,20 @@ import { useState, useEffect } from 'react';
 export default function WelcomeMobile() {
   const [greeting, setGreeting] = useState('');
   const [value, setValue] = useState('');
-  const [isVisible, setIsVisible] = useState(false);
+
+  // Список подсказок
+  const suggestions = [
+    "Расскажи о себе",
+    "Какие есть топовые пачки?",
+    "Как пройти Противостояние?",
+    "Лучшие модули на Вейдера",
+    "Гайд по Реликвиям"
+  ];
 
   useEffect(() => {
     const greetings = ['Сап', 'Привет', 'Что на душе'];
     const random = greetings[Math.floor(Math.random() * greetings.length)];
     setGreeting(random === 'Что на душе' ? 'Что на душе, юзер?' : `${random}, юзер!`);
-    
-    // Запускаем анимацию появления через мгновение после загрузки
-    const timer = setTimeout(() => setIsVisible(true), 100);
-    return () => clearTimeout(timer);
   }, []);
 
   return (
@@ -30,18 +34,29 @@ export default function WelcomeMobile() {
       {/* Контент */}
       <div className="flex-1 flex flex-col justify-center items-start px-8 w-full">
         
-        {/* Группа текста с плавной анимацией появления */}
-        <div 
-          className={`inline-block mb-8 select-none transition-all duration-700 ease-out transform ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-          }`}
-        >
+        {/* Группа текста — теперь без анимации, статично */}
+        <div className="inline-block mb-6 select-none">
           <h1 className="text-[32px] font-bold tracking-tight text-[#1a1a1a] leading-tight">
             {greeting || 'Привет, юзер!'}
           </h1>
           <h2 className="text-[32px] font-bold tracking-tight text-[#1a1a1a] opacity-60 leading-tight">
             Я помогу тебе с любым вопросом
           </h2>
+        </div>
+
+        {/* Блок подсказок (Горизонтальный скролл) */}
+        <div className="w-full max-w-[440px] mb-4">
+          <div className="flex gap-2 overflow-x-auto no-scrollbar pb-2">
+            {suggestions.map((text, index) => (
+              <button
+                key={index}
+                onClick={() => setValue(text)}
+                className="whitespace-nowrap px-4 py-2.5 bg-[#edf2f7] text-[#7a89a3] rounded-2xl text-[14px] font-semibold active:scale-95 transition-all active:bg-[#e2e8f0]"
+              >
+                {text}
+              </button>
+            ))}
+          </div>
         </div>
 
         {/* Строка ввода */}
@@ -74,6 +89,17 @@ export default function WelcomeMobile() {
         </div>
 
       </div>
+
+      {/* Скрываем стандартный скроллбар через инлайновый стиль */}
+      <style jsx global>{`
+        .no-scrollbar::-webkit-scrollbar {
+          display: none;
+        }
+        .no-scrollbar {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+      `}</style>
     </div>
   );
 }
