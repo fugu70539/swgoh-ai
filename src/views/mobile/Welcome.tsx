@@ -25,22 +25,24 @@ export default function WelcomeMobile() {
       {/* Контент */}
       <div className="flex-1 flex flex-col justify-center items-start px-8 w-full">
         
-        {/* Группа текста */}
-        <div className="inline-block mb-8">
-          <h1 className="text-[32px] font-bold tracking-tight text-black leading-tight">
+        {/* Группа текста — теперь темно-серый #1a1a1a */}
+        <div className="inline-block mb-8 select-none">
+          <h1 className="text-[32px] font-bold tracking-tight text-[#1a1a1a] leading-tight">
             {greeting || 'Привет, юзер!'}
           </h1>
-          <h2 className="text-[32px] font-bold tracking-tight text-black opacity-65 leading-tight">
+          <h2 className="text-[32px] font-bold tracking-tight text-[#1a1a1a] opacity-60 leading-tight">
             Я помогу тебе с любым вопросом
           </h2>
         </div>
 
-        {/* Строка ввода (ширина подстроена под текст выше) */}
-        <div className="w-full max-w-fit">
-          <div className="flex items-center h-[56px] bg-[#f0f3f8] rounded-full pl-6 pr-2 transition-all">
-            <div className="relative flex items-center min-w-[280px]">
+        {/* Строка ввода (фиксированная привязка кнопки внутри) */}
+        <div className="w-full max-w-[440px]">
+          <div className="flex items-center h-[56px] bg-[#f0f3f8] rounded-full pl-6 pr-2">
+            
+            <div className="relative flex-1 h-full flex items-center">
               {value === "" && (
-                <span className="absolute left-0 text-black/30 font-medium text-[16px] pointer-events-none whitespace-nowrap">
+                // Подсказка с легким синеватым оттенком
+                <span className="absolute left-0 text-[#8e9aaf] font-medium text-[16px] pointer-events-none whitespace-nowrap">
                   Спросить что угодно…
                 </span>
               )}
@@ -48,12 +50,13 @@ export default function WelcomeMobile() {
                 type="text"
                 value={value}
                 onChange={(e) => setValue(e.target.value)}
-                className="bg-transparent border-none outline-none text-black text-[16px] w-full font-medium"
+                // Текст ввода тоже темно-серый
+                className="bg-transparent border-none outline-none text-[#1a1a1a] text-[16px] w-full font-medium"
               />
             </div>
 
-            {/* Кнопка отправки */}
-            <button className="h-[42px] w-[42px] bg-black rounded-full flex items-center justify-center active:scale-95 transition-all shrink-0 ml-4">
+            {/* Кнопка отправки — теперь точно внутри контейнера */}
+            <button className="h-[42px] w-[42px] bg-[#1a1a1a] rounded-full flex items-center justify-center active:scale-95 transition-all shrink-0 ml-2">
               <img 
                 src="/Icons/send.PNG" 
                 alt="↑" 
