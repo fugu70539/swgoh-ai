@@ -13,34 +13,34 @@ export default function WelcomeMobile() {
   }, []);
 
   return (
-    <div className="fixed inset-0 flex flex-col bg-white overflow-hidden">
+    <div className="fixed inset-0 flex flex-col bg-white overflow-hidden font-sans">
       
-      {/* Меню (вверху слева) */}
+      {/* Кнопка меню (вверху слева) */}
       <div className="absolute top-6 left-6 z-50">
-        <button className="w-10 h-10 rounded-full bg-[#f0f3f8] border border-[#e5e9f0] flex items-center justify-center active:scale-90 transition-all shadow-sm">
+        <button className="w-10 h-10 rounded-full bg-[#f0f3f8] flex items-center justify-center active:scale-90 transition-all shadow-sm">
           <img src="/Icons/menu.PNG" alt="M" className="w-5 h-5 object-contain" />
         </button>
       </div>
 
-      {/* Основной экран */}
-      <div className="flex-1 flex flex-col justify-center items-center px-8">
+      {/* Основной контейнер */}
+      <div className="flex-1 flex flex-col justify-center px-8">
         
-        {/* Центрированный текст */}
-        <div className="text-center mb-10">
-          <h1 className="text-[34px] font-bold tracking-tight text-black leading-tight">
+        {/* Блок текста: теперь выровнен по левому краю */}
+        <div className="text-left mb-8">
+          <h1 className="text-[28px] font-bold tracking-tight text-black leading-tight">
             {greeting || 'Привет, юзер!'}
           </h1>
-          <p className="text-[17px] font-medium text-black/60 mt-1">
+          <p className="text-[28px] font-bold text-black/65 leading-tight">
             Спрашивай о чем угодно
           </p>
         </div>
 
-        {/* Инпут */}
-        <div className="w-full max-w-[400px]">
-          <div className="flex items-center h-[52px] bg-[#f0f3f8] rounded-full pl-6 pr-2 border border-[#e5e9f0]">
+        {/* Инпут (без контура) */}
+        <div className="w-full">
+          <div className="flex items-center h-[56px] bg-[#f0f3f8] rounded-2xl pl-5 pr-2 transition-all">
             <div className="relative flex-1 h-full flex items-center">
               {value === "" && (
-                <span className="absolute left-0 text-black/30 font-medium text-[16px] pointer-events-none">
+                <span className="absolute left-0 text-black/30 font-medium text-[17px] pointer-events-none">
                   Найти что-нибудь...
                 </span>
               )}
@@ -48,16 +48,17 @@ export default function WelcomeMobile() {
                 type="text"
                 value={value}
                 onChange={(e) => setValue(e.target.value)}
-                className="bg-transparent border-none outline-none text-black text-[16px] w-full font-medium"
+                // border-none и outline-none убирают все рамки
+                className="bg-transparent border-none outline-none text-black text-[17px] w-full font-medium"
               />
             </div>
 
-            {/* Кнопка с иконкой */}
-            <button className="h-[38px] w-[38px] bg-black rounded-full flex items-center justify-center active:scale-95 transition-all">
+            {/* Кнопка отправки */}
+            <button className="h-[42px] w-[42px] bg-black rounded-xl flex items-center justify-center active:scale-95 transition-all">
               <img 
                 src="/Icons/SendToAi.png" 
                 alt="↑" 
-                className="w-3.5 h-3.5 invert" 
+                className="w-4 h-4 invert" 
               />
             </button>
           </div>
