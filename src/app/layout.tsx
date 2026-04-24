@@ -3,9 +3,10 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "swgoh.ai",
-  description: "AI Advisor for SWGOH",
+  description: "Твой ИИ-советник по SWGOH",
 };
 
+// Запрещаем зум и масштабирование на мобилках
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
@@ -19,8 +20,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="ru">
-      <body className="select-none touch-none overflow-hidden bg-white text-black antialiased">
+    // select-none отключает выделение объектов на сайте
+    // overflow-hidden и fixed убирают "резиновый" скролл на iOS
+    <html lang="ru" className="h-full overflow-hidden select-none fixed inset-0">
+      <body className="bg-white text-black antialiased h-full overflow-hidden font-sans">
         {children}
       </body>
     </html>
