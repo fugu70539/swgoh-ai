@@ -15,14 +15,14 @@ export default function Page() {
     "Лучший флот для Арены", "Как эффективно фармить моды?", "Событие на Чебакку"
   ];
 
-  // Твоя логика случайных подсказок
   useEffect(() => {
     setItems([...pool].sort(() => 0.5 - Math.random()).slice(0, 6));
   }, []);
 
-  const send = () => {
-    const t = v.trim();
-    // Новая механика: жесткая валидация (минимум 2 символа, не только пробелы/эмодзи)
+  const send = (overrideText?: string) => {
+    const textToSend = overrideText || v;
+    const t = textToSend.trim();
+    
     if (t.length <= 1 || !/[a-zA-Zа-яА-Я0-9]/.test(t)) return;
 
     setSt('chat');
@@ -37,12 +37,10 @@ export default function Page() {
     }, 600);
   };
 
-  // Механика для кнопки: проверка валидности для прозрачности
   const isValid = v.trim().length > 1 && /[a-zA-Zа-яА-Я0-9]/.test(v.trim());
 
   return (
     <div className="fixed inset-0 flex flex-col bg-white overflow-hidden font-sans">
-      {/* Кнопка меню остается на месте */}
       <div className="absolute top-6 left-6 z-50">
         <button className="w-[42px] h-[42px] rounded-full bg-[#edf2f7] flex items-center justify-center active:scale-90 transition-all">
           <img src="/Icons/menu.PNG" alt="" className="w-5 h-5 object-contain" />
@@ -50,7 +48,7 @@ export default function Page() {
       </div>
 
       <div className="flex-1 relative w-full">
-        {/* Welcome State - Твоя верстка */}
+        {/* Welcome State */}
         <div className={`absolute inset-0 flex flex-col justify-center px-8 transition-all duration-500 ease-in-out ${st === 'chat' ? 'opacity-0 -translate-y-20 pointer-events-none' : 'opacity-100'}`}>
           <div className="w-full max-w-[440px]">
             <div className="flex items-center gap-3 mb-1">
@@ -61,7 +59,11 @@ export default function Page() {
             <div className="h-3" />
             <div className="flex gap-3 overflow-x-auto no-scrollbar py-1">
               {items.map((t, i) => (
-                <button key={i} onClick={() => setV(t)} className="flex items-center gap-2 whitespace-nowrap px-5 py-3 bg-white text-[#7a89a3] border-[1.5px] border-[#edf2f7]/60 rounded-full text-[14px] font-semibold active:scale-95 transition-all flex-shrink-0">
+                <button 
+                  key={i} 
+                  onClick={() => send(t)} 
+                  className="flex items-center gap-2 whitespace-nowrap px-5 py-3 bg-white text-[#7a89a3] border-[1.5px] border-[#edf2f7]/60 rounded-full text-[14px] font-semibold active:scale-95 transition-all flex-shrink-0"
+                >
                   <img src="/Icons/idea.PNG" alt="" className="w-4 h-4 opacity-60" style={{ filter: 'invert(64%) sepia(59%) saturate(1450%) hue-rotate(326deg) brightness(98%) contrast(92%)' }} />
                   {t}
                 </button>
@@ -70,8 +72,8 @@ export default function Page() {
           </div>
         </div>
 
-        {/* Chat State - Текст улетает в центр, отступы как у запроса */}
-        <div className={`absolute inset-0 pt-28 px-8 overflow-y-auto no-scrollbar transition-opacity duration-500 ${st === 'chat' ? 'opacity-100' : 'opacity-0'}`}>
+        {/* Chat State (Messages) */}
+        <div className={`absolute inset-0 pt-24 px-8 overflow-y-auto no-scrollbar transition-opacity duration-500 ${st === 'chat' ? 'opacity-100' : 'opacity-0'}`}>
           <div className="w-full max-w-[440px] flex flex-col gap-8 pb-32">
             {h.map((m, i) => (
               <div key={i} className={`text-[16px] leading-relaxed ${m.r === 'user' ? 'text-[#1a1a1a] font-semibold' : 'text-[#1a1a1a] opacity-80'}`}>
@@ -82,19 +84,24 @@ export default function Page() {
         </div>
       </div>
 
-      {/* Input Group - Плавное опускание вниз */}
+      {/* Input Group */}
       <div className={`w-full px-8 pb-6 transition-all duration-500 ease-in-out ${st === 'chat' ? 'translate-y-0' : '-translate-y-[calc(50vh-140px)]'}`}>
         <div className="w-full max-w-[440px] mx-auto">
           <div className="flex items-center h-[56px] bg-[#edf2f7] rounded-full px-2">
             <div className="relative flex-1 h-full flex items-center ml-4">
               {v === "" && <span className="absolute left-0 text-[#7a89a3] font-medium text-[16px] pointer-events-none">Спросить что угодно…</span>}
-              <input type="text" value={v} onChange={(e) => setV(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && send()} className="bg-transparent border-none outline-none text-[#1a1a1a] text-[16px] w-full font-medium" />
+              <input 
+                type="text" 
+                value={v} 
+                onChange={(e) => setV(e.target.value)} 
+                onKeyDown={(e) => e.key === 'Enter' && send()} 
+                className="bg-transparent border-none outline-none text-[#1a1a1a] text-[16px] w-full font-medium" 
+              />
             </div>
-            {/* Механика прозрачности: 0.65 -> 1 */}
             <button 
-              onClick={send}
+              onClick={() => send()}
               disabled={!isValid}
-              className={`h-[42px] w-[42px] bg-[#1a1a1a] rounded-full flex items-center justify-center transition-all duration-200 shrink-0 ${isValid ? 'opacity-100' : 'opacity-[0.65]'}`}
+              className={`h-[42px] w-[42px] bg-[#1a1a1a] rounded-full flex items-center justify-center transition-all duration-300 shrink-0 ${isValid ? 'opacity-100 scale-100' : 'opacity-[0.65] scale-95'}`}
             >
               <img src="/Icons/send.PNG" alt="" className="w-4 h-4 brightness-0 invert" />
             </button>
