@@ -85,10 +85,10 @@ export default function WelcomeMobile() {
                 <img 
                   src="/Icons/idea.PNG" 
                   alt="idea" 
-                  className="w-4 h-4 object-contain opacity-70"
+                  className="w-4 h-4 object-contain"
                   style={{ 
-                    // Цвет в тон текста рядом (#7a89a3)
-                    filter: 'invert(58%) sepia(13%) saturate(588%) hue-rotate(182deg) brightness(94%) contrast(90%)' 
+                    // Принудительный цвет EF7D5C через фильтры
+                    filter: 'invert(64%) sepia(59%) saturate(1450%) hue-rotate(326deg) brightness(98%) contrast(92%)' 
                   }}
                 />
                 {text}
@@ -128,13 +128,6 @@ export default function WelcomeMobile() {
             ИИ может ошибаться, не стоит принимать все<br />за чистую монету
           </p>
         </div>
-      </div>
-
-      {/* Футер-подпись гильдии (тонкий намек на авторство) */}
-      <div className="pb-6 w-full text-center">
-         <span className="text-[10px] text-[#1a1a1a] opacity-20 font-bold tracking-[0.2em] uppercase">
-           Those who are in the shadows
-         </span>
       </div>
 
       <style jsx global>{`
