@@ -40,6 +40,7 @@ export default function WelcomeMobile() {
 
   return (
     <div className="fixed inset-0 flex flex-col bg-white overflow-hidden font-sans">
+      {/* Кнопка меню */}
       <div className="absolute top-6 left-6 z-50">
         <button className="w-[42px] h-[42px] rounded-full bg-[#edf2f7] flex items-center justify-center active:scale-90 transition-all">
           <img src="/Icons/menu.PNG" alt="" className="w-5 h-5 object-contain" />
@@ -47,7 +48,7 @@ export default function WelcomeMobile() {
       </div>
 
       <div className="flex-1 relative w-full">
-        {/* Welcome State */}
+        {/* БЛОК 1: Нулевое состояние (Welcome) */}
         <div className={`absolute inset-0 flex flex-col justify-center px-8 transition-all duration-500 ease-in-out ${st === 'chat' ? 'opacity-0 -translate-y-20 pointer-events-none' : 'opacity-100'}`}>
           <div className="w-full max-w-[440px]">
             <div className="flex items-center gap-3 mb-1">
@@ -67,7 +68,7 @@ export default function WelcomeMobile() {
           </div>
         </div>
 
-        {/* Chat State (Messages) */}
+        {/* БЛОК 2: Состояние с чатом (Messages) */}
         <div className={`absolute inset-0 pt-24 px-8 overflow-y-auto no-scrollbar transition-opacity duration-500 ${st === 'chat' ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
           <div className="w-full max-w-[440px] flex flex-col gap-8 pb-32">
             {h.map((m, i) => (
@@ -79,7 +80,7 @@ export default function WelcomeMobile() {
         </div>
       </div>
 
-      {/* Input Group */}
+      {/* Инпут (общий для обоих состояний) */}
       <div className={`w-full px-8 pb-6 transition-all duration-500 ease-in-out ${st === 'chat' ? 'translate-y-0' : '-translate-y-[calc(50vh-140px)]'}`}>
         <div className="w-full max-w-[440px] mx-auto">
           <div className="flex items-center h-[56px] bg-[#edf2f7] rounded-full px-2">
