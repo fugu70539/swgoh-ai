@@ -2,124 +2,34 @@
 
 import { useState, useEffect } from 'react';
 
-export default function Page() {
-  const [gr, setGr] = useState('');
-  const [v, setV] = useState('');
+export default function WelcomeView({ isVisible, onSuggest }: { isVisible: boolean, onSuggest: (t: string) => void }) {
   const [items, setItems] = useState<string[]>([]);
-
-  const pool = [
-    "Лучшая пачка с Кеноби",
-    "Как зафармить Легенду?",
-    "Модули для Дарта Вейдера",
-    "Кого качать новичку в 2026?",
-    "Гайд на Великую Арену",
-    "Как победить Джаббу?",
-    "Рейд Набу: лучшие герои",
-    "Зачем нужны реликвии 9?",
-    "Контр-пики Галактических Легенд",
-    "Лучший флот для Арены",
-    "Как эффективно фармить моды?",
-    "Событие на Чебакку",
-    "Приоритет фарма Кайло Рена",
-    "Лучшие Дзеты для Гильдии",
-    "Как фармить Осколки быстрее?",
-    "Тир-лист персонажей 2026",
-    "Кого брать в команду Феникс?",
-    "Как победить в Войнах Гильдий?",
-    "Синхронизация с SWGOH.GG",
-    "Эффективный фарм кредитов",
-    "Как пройти 7 уровень Испытаний?",
-    "Лучшие команды для Завоевания",
-    "Гайд по Осквернителю",
-    "Как получить Бо-Катан (Мандалор)?",
-    "Приоритеты в магазине Осколков"
-  ];
+  const pool = ["Лучшая пачка с Кеноби", "Гайд на Великую Арену", "Как победить Джаббу?", "Рейд Набу", "Релики 9"];
 
   useEffect(() => {
-    const list = ['Сап', 'Привет', 'Что на душе'];
-    const r = list[Math.floor(Math.random() * list.length)];
-    setGr(r === 'Что на душе' ? 'Что на душе, юзер?' : `${r}, юзер!`);
-    setItems([...pool].sort(() => 0.5 - Math.random()).slice(0, 6));
+    setItems([...pool].sort(() => 0.5 - Math.random()).slice(0, 4));
   }, []);
 
   return (
-    <div className="fixed inset-0 flex flex-col bg-white overflow-hidden font-sans">
-      <div className="absolute top-6 left-6 z-50">
-        <button className="w-[42px] h-[42px] rounded-full bg-[#edf2f7] flex items-center justify-center active:scale-90 transition-all">
-          <img src="/Icons/menu.PNG" alt="" className="w-5 h-5 object-contain" />
-        </button>
-      </div>
-
-      <div className="flex-1 flex flex-col justify-center items-start px-8 w-full">
-        <div className="w-full max-w-[440px] flex flex-col items-start">
-          
-          <div className="w-full select-none">
-            <div className="flex items-center gap-3 mb-1">
-              <img src="/Icons/appicon.PNG" alt="" className="w-[36px] h-[36px] object-contain" />
-              <h1 className="text-[32px] font-bold tracking-tight text-[#1a1a1a] leading-tight">
-                {gr || 'Привет, юзер!'}
-              </h1>
-            </div>
-            <h2 className="text-[32px] font-bold tracking-tight text-[#1a1a1a] opacity-60 leading-tight">
-              Я помогу тебе с любым вопросом
-            </h2>
-          </div>
-
-          <div className="h-3" />
-
-          <div className="w-full">
-            <div className="flex gap-3 overflow-x-auto no-scrollbar py-1">
-              {items.map((t, i) => (
-                <button
-                  key={i}
-                  onClick={() => setV(t)}
-                  className="flex items-center gap-2 whitespace-nowrap px-5 py-3 bg-white text-[#7a89a3] border-[1.5px] border-[#edf2f7]/60 rounded-full text-[14px] font-semibold active:scale-95 transition-all active:bg-[#f8fafc] flex-shrink-0"
-                >
-                  <img 
-                    src="/Icons/idea.PNG" 
-                    alt="" 
-                    className="w-4 h-4 object-contain opacity-60"
-                    style={{ filter: 'invert(64%) sepia(59%) saturate(1450%) hue-rotate(326deg) brightness(98%) contrast(92%)' }}
-                  />
-                  {t}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div className="h-3" />
-
-          <div className="w-full">
-            <div className="flex items-center h-[56px] bg-[#edf2f7] rounded-full px-2">
-              <div className="relative flex-1 h-full flex items-center ml-4">
-                {v === "" && (
-                  <span className="absolute left-0 text-[#7a89a3] font-medium text-[16px] pointer-events-none">
-                    Спросить что угодно…
-                  </span>
-                )}
-                <input
-                  type="text"
-                  value={v}
-                  onChange={(e) => setV(e.target.value)}
-                  className="bg-transparent border-none outline-none text-[#1a1a1a] text-[16px] w-full font-medium"
-                />
-              </div>
-              <button className="h-[42px] w-[42px] bg-[#1a1a1a] rounded-full flex items-center justify-center active:scale-95 transition-all shrink-0">
-                <img src="/Icons/send.PNG" alt="" className="w-4 h-4 brightness-0 invert" />
-              </button>
-            </div>
-            <p className="mt-3 text-center text-[11.5px] text-[#1a1a1a] opacity-[0.6] font-medium leading-[1.1] w-full tracking-wide">
-              ИИ может ошибаться, не стоит принимать все<br />за чистую монету
-            </p>
-          </div>
-
+    <div className={`absolute inset-0 flex flex-col justify-center px-8 transition-all duration-500 ease-in-out ${!isVisible ? 'opacity-0 -translate-y-20 pointer-events-none' : 'opacity-100'}`}>
+      <div className="w-full max-w-[440px]">
+        <div className="flex items-center gap-3 mb-1">
+          <img src="/Icons/appicon.PNG" alt="" className="w-[36px] h-[36px]" />
+          <h1 className="text-[32px] font-bold tracking-tight text-[#1a1a1a]">Привет, юзер!</h1>
+        </div>
+        <h2 className="text-[32px] font-bold tracking-tight text-[#1a1a1a] opacity-60 leading-tight">Я помогу тебе с любым вопросом</h2>
+        
+        <div className="h-3" />
+        
+        <div className="flex gap-3 overflow-x-auto no-scrollbar py-1">
+          {items.map((t, i) => (
+            <button key={i} onClick={() => onSuggest(t)} className="flex items-center gap-2 whitespace-nowrap px-5 py-3 bg-white text-[#7a89a3] border-[1.5px] border-[#edf2f7]/60 rounded-full text-[14px] font-semibold active:scale-95 transition-all">
+              <img src="/Icons/idea.PNG" alt="" className="w-4 h-4 opacity-60" style={{ filter: 'invert(64%) sepia(59%) saturate(1450%) hue-rotate(326deg) brightness(98%) contrast(92%)' }} />
+              {t}
+            </button>
+          ))}
         </div>
       </div>
-
-      <style jsx global>{`
-        .no-scrollbar::-webkit-scrollbar { display: none; }
-        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-      `}</style>
     </div>
   );
 }
